@@ -1,4 +1,3 @@
-import {sequelize} from "../../database/sequelizeConnection.js";
 import PersonModel from "../models/personModel.js";
 
 class PersonController {
@@ -9,19 +8,19 @@ class PersonController {
             return res.status(200).json(people);
         } catch (err) {
             return res.status(500).json({message: "Houve um erro de conexão.", error: err.message});
-        } 
-    }  
+        }
+    }
     
     async createPerson(req, res) {
         try {
-            const { id, name, email } = req.body;
+            const { name, email } = req.body;
             
-            if (!id || !name || !email) {
+            if (!name || !email) {
                 console.error("Alguma entrada está faltando: id, nome ou email");
                 return;
             }
 
-            const newPerson = await PersonModel.build({id, name,  email});
+            const newPerson = await PersonModel.build({ name,  email });
 
             await newPerson.save();
             return res.json({"message": "Pessoa cadastrada com sucesso."});

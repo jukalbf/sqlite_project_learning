@@ -14,8 +14,6 @@ async function tryConnection() {
         console.log("Modelos sincronizados.");
     } catch (err) {
         console.log(`Erro ao tentar se conectar: ${err.message}`);
-    } finally {
-        await sequelize.close();
     }
 }
 
